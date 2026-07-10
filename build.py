@@ -106,7 +106,7 @@ for r in rows:
         'id':        bid,
         'title':     r['Title'],
         'author':    r['Author'],
-        'rating':    int(r['My Rating']),
+        'rating':    int(float(r['My Rating'])),
         'pages':     r['Number of Pages'],
         'year':      r['Original Publication Year'].split('.')[0] if r['Original Publication Year'] else '',
         'shelf':     r['Exclusive Shelf'],
