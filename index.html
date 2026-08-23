@@ -116,80 +116,6 @@
   font-style: italic; line-height: 1.4;
 }
 
-/* CURRENTLY READING BANNER */
-.currently-reading {
-  background: linear-gradient(135deg, #1a1209 60%, #2a1f0f);
-  border-bottom: 1px solid rgba(201,151,58,.2);
-  padding: 1rem 2rem;
-  display: flex; align-items: center; gap: 1.5rem;
-  cursor: pointer; transition: background .2s;
-}
-.currently-reading:hover { background: linear-gradient(135deg, #221808 60%, #342610); }
-.cr-label {
-  font-size: .6rem; text-transform: uppercase; letter-spacing: .15em;
-  color: var(--gold); white-space: nowrap; writing-mode: vertical-rl;
-  transform: rotate(180deg); opacity: .8;
-}
-.cr-cover {
-  width: 52px; height: 78px; flex-shrink: 0;
-  border: 1px solid rgba(201,151,58,.3); overflow: hidden;
-}
-.cr-cover img { width: 100%; height: 100%; object-fit: cover; }
-.cr-info { flex: 1; }
-.cr-tag { font-size: .62rem; text-transform: uppercase; letter-spacing: .1em; color: var(--gold); margin-bottom: .25rem; }
-.cr-title { font-family: "Playfair Display", serif; font-size: 1rem; font-style: italic; color: rgba(245,239,227,.9); line-height: 1.2; }
-.cr-author { font-size: .75rem; color: rgba(245,239,227,.45); margin-top: .2rem; }
-.cr-progress { margin-top: .4rem; font-size: .65rem; color: rgba(201,151,58,.6); }
-.cr-arrow { color: rgba(201,151,58,.4); font-size: 1.2rem; }
-
-/* WHAT SHOULD I READ */
-.mood-view { padding: 2rem; max-width: 1000px; margin: 0 auto; display: none; }
-.mood-header { margin-bottom: 1.5rem; }
-.mood-header h2 { font-family: "Playfair Display", serif; font-size: 1.6rem; font-weight: 400; }
-.mood-header p { color: var(--muted); font-size: .85rem; margin-top: .3rem; }
-.mood-pills { display: flex; gap: .6rem; flex-wrap: wrap; margin-bottom: 2rem; }
-.mood-pill {
-  padding: .5rem 1.2rem; border-radius: 20px; cursor: pointer;
-  border: 1.5px solid var(--border); background: transparent;
-  color: var(--muted); font-family: "DM Sans", sans-serif;
-  font-size: .85rem; transition: all .2s;
-}
-.mood-pill:hover { border-color: var(--accent); color: var(--accent); }
-.mood-pill.active { background: var(--accent); color: white; border-color: var(--accent); }
-.mood-results { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px,1fr)); gap: 1.2rem; }
-.mood-empty { color: var(--muted); font-style: italic; font-size: .9rem; grid-column: 1/-1; padding: 2rem 0; }
-
-body { background:var(--paper); color:var(--ink); font-family:"DM Sans",sans-serif; font-weight:300; min-height:100vh; }
-
-/* HEADER */
-header { background:var(--ink); color:var(--paper); padding:2.5rem 2rem 0; text-align:center; position:relative; overflow:hidden; }
-header::before { content:""; position:absolute; inset:0; background:repeating-linear-gradient(45deg,transparent,transparent 40px,rgba(201,151,58,.04) 40px,rgba(201,151,58,.04) 41px); }
-.header-inner { position:relative; z-index:1; }
-header h1 { font-family:"Playfair Display",serif; font-size:clamp(2rem,5vw,3.8rem); font-weight:400; letter-spacing:-.02em; line-height:1.1; }
-header h1 em { font-style:italic; color:var(--gold); }
-header p { margin-top:.5rem; color:rgba(245,239,227,.55); font-size:.85rem; letter-spacing:.1em; text-transform:uppercase; }
-
-
-/* ROTATING QUOTE */
-.quote-ticker {
-  background:var(--ink); padding:0 2rem 2rem; display:flex; justify-content:center;
-}
-.quote-box {
-  max-width:720px; width:100%; text-align:center; padding:1.5rem 2rem;
-  border-top:1px solid rgba(201,151,58,.2);
-}
-.quote-text {
-  font-family:"Playfair Display",serif; font-style:italic;
-  font-size:clamp(.95rem,2.5vw,1.15rem); color:rgba(245,239,227,.85);
-  line-height:1.7; min-height:3em;
-  transition:opacity .5s;
-}
-.quote-meta { margin-top:.75rem; font-size:.75rem; color:rgba(201,151,58,.8); letter-spacing:.06em; }
-.quote-meta span { color:rgba(245,239,227,.4); margin:0 .4rem; }
-.quote-dots { display:flex; justify-content:center; gap:.4rem; margin-top:1rem; }
-.quote-dot { width:5px; height:5px; border-radius:50%; background:rgba(201,151,58,.3); cursor:pointer; transition:background .2s; }
-.quote-dot.active { background:var(--gold); }
-
 /* NAV TABS */
 .nav-tabs {
   background:var(--paper2); border-bottom:1px solid var(--border);
@@ -425,11 +351,7 @@ footer .footer-copy {
 </div>
 
 
-<div class="currently-reading" id="crBanner" onclick="openModal('60321392')">
-  <div class="cr-label">Now Reading</div>
-  <div class="cr-cover"><img src="https://covers.openlibrary.org/b/isbn/9781982117351-L.jpg" alt=""></div>
-  <div class="cr-info">
-    <div class="cr-tag">Currently Reading</div>
+
     <div class="cr-title">The Song of the Cell</div>
     <div class="cr-author">Siddhartha Mukherjee</div>
     <div class="cr-progress">Science &amp; Non-Fiction &middot; 473 pages</div>
