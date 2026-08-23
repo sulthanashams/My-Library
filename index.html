@@ -427,6 +427,54 @@ footer .footer-copy {
   letter-spacing: .06em;
 }
 
+
+/* AROUND THE WORLD VIEW */
+.world-view { padding: 2rem; max-width: 1400px; margin: 0 auto; display: none; }
+.world-region { margin-bottom: 3rem; }
+.world-region-header {
+  display: flex; align-items: baseline; gap: 1rem;
+  margin-bottom: 1rem; padding-bottom: .5rem;
+  border-bottom: 1px solid var(--border);
+}
+.world-region-title {
+  font-family: "Playfair Display", serif;
+  font-size: 1.3rem; font-weight: 700; color: var(--ink);
+}
+.world-region-count { font-size: .75rem; color: var(--muted); }
+.world-books { display: flex; gap: 1rem; overflow-x: auto; padding-bottom: .75rem; }
+.world-card { flex-shrink: 0; width: 130px; cursor: pointer; }
+.world-card:hover .world-card-cover { transform: translateY(-3px); }
+.world-card-cover {
+  width: 130px; height: 195px; background: var(--paper2);
+  border: 1px solid var(--border); overflow: hidden;
+  display: flex; align-items: center; justify-content: center;
+  transition: transform .2s;
+}
+.world-card-cover img { width: 100%; height: 100%; object-fit: cover; }
+.world-card-title {
+  font-size: .72rem; font-family: "Playfair Display", serif;
+  font-weight: 700; margin-top: .35rem; line-height: 1.3;
+  display: -webkit-box; -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical; overflow: hidden;
+}
+.world-card-author { font-size: .65rem; color: var(--muted); margin-top: .1rem; }
+
+
+/* DISCOVER VIEW */
+.discover-view { display: none; }
+.discover-subtabs {
+  background: var(--paper2); border-bottom: 1px solid var(--border);
+  padding: .6rem 2rem; display: flex; gap: .5rem;
+}
+.discover-subtab {
+  padding: .35rem 1rem; border-radius: 20px; cursor: pointer;
+  border: 1.5px solid var(--border); background: transparent;
+  color: var(--muted); font-family: "DM Sans", sans-serif;
+  font-size: .8rem; transition: all .2s; letter-spacing: .03em;
+}
+.discover-subtab:hover { border-color: var(--accent); color: var(--accent); }
+.discover-subtab.active { background: var(--accent); color: white; border-color: var(--accent); }
+
 @media(max-width:600px){
   .modal-header{flex-direction:column;}
   .filters{padding:.6rem 1rem;}
@@ -460,8 +508,7 @@ footer .footer-copy {
 
 <div class="nav-tabs">
   <button class="nav-tab active" onclick="showView('library',this)">Library</button>
-  <button class="nav-tab" onclick="showView('genres',this)">By Genre</button>
-  <button class="nav-tab" onclick="showView('mood',this)">What to Read</button>
+  <button class="nav-tab" onclick="showView('discover',this)">What to Read</button>
   <button class="nav-tab" onclick="showView('kids',this)">For Young Readers</button>
   <button class="nav-tab" onclick="showView('quotes',this)">Quotes</button>
   <button class="nav-tab" onclick="showAbout()">About Me</button>
@@ -510,8 +557,17 @@ footer .footer-copy {
 </div>
 
 
+<!-- DISCOVER VIEW -->
+<div class="discover-view" id="discoverView" style="display:none">
+  <div class="discover-subtabs">
+    <button class="discover-subtab active" onclick="showSubtab('mood',this)">By Mood</button>
+    <button class="discover-subtab" onclick="showSubtab('genres',this)">By Genre</button>
+    <button class="discover-subtab" onclick="showSubtab('world',this)">Around the World</button>
+  </div>
+  <div id="discoverContent">
+
 <!-- MOOD VIEW -->
-<div class="mood-view" id="moodView" style="display:none">
+<div class="mood-view" id="moodView" style="display:block">
   <div class="mood-header">
     <h2>What should I read?</h2>
     <p>Pick a mood and discover books from this collection</p>
@@ -681,6 +737,13 @@ footer .footer-copy {
   </div>
   </div>
 </div>
+
+
+<!-- AROUND THE WORLD VIEW -->
+<div class="world-view" id="worldView" style="display:none"></div>
+
+  </div><!-- end discoverContent -->
+</div><!-- end discoverView -->
 
 <!-- MODAL -->
 <div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
@@ -897,18 +960,30 @@ document.getElementById("moodPills").addEventListener("click",function(e){
   renderMoodView();
 });
 
-var genreRendered=false, quotesRendered=false;
+var genreRendered=false, quotesRendered=false, worldRendered=false;
+
+var activeSubtab = 'mood';
+function showSubtab(sub, btn) {
+  document.querySelectorAll('.discover-subtab').forEach(function(b){ b.classList.remove('active'); });
+  if(btn) btn.classList.add('active');
+  activeSubtab = sub;
+  document.getElementById('moodView').style.display = sub === 'mood' ? 'block' : 'none';
+  document.getElementById('genreView').style.display = sub === 'genres' ? 'block' : 'none';
+  document.getElementById('worldView').style.display = sub === 'world' ? 'block' : 'none';
+  if(sub === 'mood') renderMoodView();
+  if(sub === 'genres' && !genreRendered){ renderGenreView(); genreRendered=true; }
+  if(sub === 'world' && !worldRendered){ renderWorldView(); worldRendered=true; }
+}
+
 function showView(view,btn){
   document.querySelectorAll(".nav-tab").forEach(function(t){t.classList.remove("active");});
   if(btn) btn.classList.add("active");
   document.getElementById("libraryView").style.display=view==="library"?"block":"none";
-  document.getElementById("genreView").style.display=view==="genres"?"block":"none";
+  document.getElementById("discoverView").style.display=view==="discover"?"block":"none";
   document.getElementById("quotesView").style.display=view==="quotes"?"block":"none";
-  document.getElementById("moodView").style.display=view==="mood"?"block":"none";
   document.getElementById("kidsView").style.display=view==="kids"?"block":"none";
-  if(view==="genres" && !genreRendered){ renderGenreView(); genreRendered=true; }
   if(view==="quotes" && !quotesRendered){ renderQuotesView(); quotesRendered=true; }
-  if(view==="mood") renderMoodView();
+  if(view==="discover"){ showSubtab(activeSubtab, document.querySelector(".discover-subtab.active")); }
 }
 
 document.querySelectorAll("#shelfPills .pill").forEach(function(btn){
@@ -980,6 +1055,36 @@ function closeModal(e){
   document.getElementById("modalOverlay").classList.remove("open");
   document.body.style.overflow="";
 }
+
+var REGIONS = {"South Asia": ["Midnight\u2019s Children", "The Satanic Verses", "Victory City", "Enchantress of Florance", "The God of Small Things", "The White Tiger", "The Inheritance of Loss", "Train to Pakistan", "Nine Lives: In Search of the Sacred in Modern India", "The Last Mughal: The Fall of a Dynasty: Delhi, 1857", "Ponniyin Selvan (#1) [Ponniyin Selvan - The New Tide]", "Bhima Lone Warrior", "The Palace of Illusions", "Legends of Khasak", "Samskara: A Rite for a Dead Man", "Malgudi Days", "Interpreter of Maladies", "Unaccustomed Earth", "The Argumentative Indian: Writings on Indian History, Culture and Identity", "Where the Rain is Born: Writings About Kerala", "\u0d28\u0d4d\u0d31\u0d41\u0d2a\u0d4d\u0d2a\u0d41\u0d2a\u0d4d\u0d2a\u0d3e\u0d15\u0d4d\u0d15\u0d4a\u0d30\u0d3e\u0d28\u0d47\u0d23\u0d4d\u0d1f\u0d3e\u0d7c\u0d28\u0d4d\u0d28\u0d4d! [Ntuppuppaakkoraanendaarnnu!]", "\u0d28\u0d37\u0d4d\u0d1f\u0d2a\u0d4d\u0d2a\u0d46\u0d1f\u0d4d\u0d1f \u0d28\u0d40\u0d32\u0d3e\u0d02\u0d2c\u0d30\u0d3f [Nashtapetta Neelambari]", "Chemmeen", "One Part Woman", "The Calcutta Chromosome", "The Assassination of Rajiv Gandhi", "The Lowland", "The Seven Moons of Maali Almeida", "In Light of India", "Azadi: Freedom. Fascism. Fiction.", "Home Fire", "The Hindu Way: An Introduction to Hinduism", "Tomb of Sand"], "Britain & Ireland": ["Wolf Hall (Thomas Cromwell, #1)", "Never Let Me Go", "The Remains of the Day", "Klara and the Sun", "When We Were Orphans", "Nocturnes: Five Stories of Music and Nightfall", "The Buried Giant", "Old God's Time", "Small Things Like These", "Eleanor Oliphant Is Completely Fine", "The Rain Before it Falls", "Normal People", "The Girl With the Dragon Tattoo (Millennium, #1)", "The Secret History", "The Hitchhiker\u2019s Guide to the Galaxy (The Hitchhiker's Guide to the Galaxy, #1)", "The Lion, the Witch and the Wardrobe (Chronicles of Narnia, #1)", "The BFG", "Matilda", "Charlie and the Chocolate Factory (Charlie Bucket, #1)", "The Secret Garden", "A Spy Among Friends: Kim Philby and the Great Betrayal", "The Spy and the Traitor: The Greatest Espionage Story of the Cold War", "Creation Lake"], "Americas": ["To Kill a Mockingbird", "The Color Purple", "Beloved", "The Bluest Eye", "In Cold Blood", "Homegoing", "I Know Why the Caged Bird Sings (Maya Angelou's Autobiography, #1)", "The Sound of Things Falling", "Permanent Record", "The Handmaid\u2019s Tale (The Handmaid's Tale, #1)", "The Secret History", "The Little Friend", "Gone Girl", "Small Great Things", "Alias Grace", "The Blind Assassin"], "East Asia": ["The Memory Police", "Colorless Tsukuru Tazaki and His Years of Pilgrimage", "South of the Border, West of the Sun", "Strange Weather in Tokyo", "The Cake Tree in the Ruins", "Sweet Bean Paste"], "Europe": ["The Reader", "Time Shelter", "Fatherland", "The Heart of a Dog", "Midnight in Chernobyl: The Untold Story of the World's Greatest Nuclear Disaster", "The Promise", "A General Theory of Oblivion", "Blindness", "The White Castle", "A Strangeness in My Mind", "The 100-Year-Old Man Who Climbed Out the Window and Disappeared (Hundred-Year-Old Man, #1)", "The Girl With the Dragon Tattoo (Millennium, #1)", "A Man Called Ove", "Anxious People", "The Rain Before it Falls", "All the Light We Cannot See"], "Africa & Middle East": ["Long Walk to Freedom", "The Promise", "Homegoing", "A General Theory of Oblivion", "The Prophet", "Mossad: The Greatest Missions of the Israeli Secret Service"], "Other Worlds": ["The Fellowship of the Ring (The Lord of the Rings, #1)", "The Hobbit, or There and Back Again", "A Game of Thrones (A Song of Ice and Fire, #1)", "Harry Potter and the Sorcerer's Stone (Harry Potter, #1)", "The Lion, the Witch and the Wardrobe (Chronicles of Narnia, #1)", "Good Omens: The Nice and Accurate Prophecies of Agnes Nutter, Witch", "The Color of Magic (Discworld, #1; Rincewind, #1)", "A Darker Shade of Magic (Shades of Magic, #1)", "The House in the Cerulean Sea (Cerulean Chronicles, #1)", "In Ascension", "The Mountain in the Sea", "Klara and the Sun", "Never Let Me Go", "The Handmaid\u2019s Tale (The Handmaid's Tale, #1)", "The Three-Body Problem (Remembrance of Earth\u2019s Past, #1)", "The Dark Forest (Remembrance of Earth\u2019s Past, #2)"]};
+var REGION_EMOJIS = {"South Asia": "\ud83c\udf0f", "Britain & Ireland": "\ud83c\udff4", "Americas": "\ud83c\udf0e", "East Asia": "\ud83d\uddfe", "Europe": "\ud83c\uddea\ud83c\uddfa", "Africa & Middle East": "\ud83c\udf0d", "Other Worlds": "\ud83c\udf0c"};
+function renderWorldView(){
+  var bookMap = {};
+  for(var i=0;i<BOOKS.length;i++) bookMap[BOOKS[i].title] = BOOKS[i];
+  var html = "";
+  var regionOrder = ["South Asia","Britain & Ireland","Americas","East Asia","Europe","Africa & Middle East","Other Worlds"];
+  regionOrder.forEach(function(region){
+    var titles = REGIONS[region] || [];
+    var regionBooks = titles.map(function(t){ return bookMap[t]; }).filter(Boolean);
+    if(!regionBooks.length) return;
+    var emoji = REGION_EMOJIS[region] || "";
+    html += "<div class=\'world-region\'>";
+    html += "<div class=\'world-region-header\'><span class=\'world-region-title\'>" + emoji + " " + region + "</span><span class=\'world-region-count\'>" + regionBooks.length + " books</span></div>";
+    html += "<div class=\'world-books\'>";
+    regionBooks.forEach(function(book){
+      var cover = book.cover ? "<img src=\'" + book.cover + "\' alt=\'\' loading=\'lazy\'>" : "<div class=\'cover-fallback\'>" + escHtml(book.title) + "</div>";
+      html += "<div class=\'world-card\' data-id=\'" + escHtml(book.id) + "\'><div class=\'world-card-cover\'>" + cover + "</div><div class=\'world-card-title\'>" + escHtml(book.title.split(" (")[0]) + "</div><div class=\'world-card-author\'>" + escHtml(book.author) + "</div></div>";
+    });
+    html += "</div></div>";
+  });
+  document.getElementById("worldView").innerHTML = html;
+}
+
+document.getElementById("worldView").addEventListener("click",function(e){
+  var card = e.target.closest(".world-card");
+  if(card) openModal(card.getAttribute("data-id"));
+});
+
 document.addEventListener("keydown",function(e){
   if(e.key==="Escape"){ closeModal(null); closeAbout(null); }
 });
