@@ -116,31 +116,63 @@
   font-style: italic; line-height: 1.4;
 }
 
-/* CURRENTLY READING BANNER */
-.currently-reading {
-  background: linear-gradient(135deg, #1a1209 60%, #2a1f0f);
-  border-bottom: 1px solid rgba(201,151,58,.2);
-  padding: 1rem 2rem;
-  display: flex; align-items: center; gap: 1.5rem;
-  cursor: pointer; transition: background .2s;
+/* KIDS VIEW */
+.kids-view { max-width: 860px; margin: 0 auto; padding: 3rem 2rem; display: none; }
+.kids-essay {
+  font-family: "DM Sans", sans-serif; font-size: 1rem; line-height: 1.85;
+  color: var(--ink); font-weight: 300;
 }
-.currently-reading:hover { background: linear-gradient(135deg, #221808 60%, #342610); }
-.cr-label {
-  font-size: .6rem; text-transform: uppercase; letter-spacing: .15em;
-  color: var(--gold); white-space: nowrap; writing-mode: vertical-rl;
-  transform: rotate(180deg); opacity: .8;
+.kids-essay p { margin-bottom: 1.4rem; }
+.kids-essay .essay-title {
+  font-family: "Playfair Display", serif; font-size: 1.6rem;
+  font-weight: 400; margin-bottom: .3rem; line-height: 1.2;
 }
-.cr-cover {
-  width: 52px; height: 78px; flex-shrink: 0;
-  border: 1px solid rgba(201,151,58,.3); overflow: hidden;
+.kids-essay .essay-subtitle {
+  font-size: .85rem; color: var(--muted); margin-bottom: 2rem;
+  font-style: italic;
 }
-.cr-cover img { width: 100%; height: 100%; object-fit: cover; }
-.cr-info { flex: 1; }
-.cr-tag { font-size: .62rem; text-transform: uppercase; letter-spacing: .1em; color: var(--gold); margin-bottom: .25rem; }
-.cr-title { font-family: "Playfair Display", serif; font-size: 1rem; font-style: italic; color: rgba(245,239,227,.9); line-height: 1.2; }
-.cr-author { font-size: .75rem; color: rgba(245,239,227,.45); margin-top: .2rem; }
-.cr-progress { margin-top: .4rem; font-size: .65rem; color: rgba(201,151,58,.6); }
-.cr-arrow { color: rgba(201,151,58,.4); font-size: 1.2rem; }
+.kids-essay .essay-signature {
+  margin-top: 2rem; font-style: italic; color: var(--muted); font-size: .9rem;
+}
+.kids-divider {
+  border: none; border-top: 1px solid var(--border);
+  margin: 2.5rem 0;
+}
+.kids-reco-title {
+  font-family: "Playfair Display", serif; font-size: 1.2rem;
+  font-weight: 700; margin-bottom: 1rem; color: var(--ink);
+}
+.kids-reco-text {
+  font-size: .95rem; line-height: 1.85; color: var(--ink);
+  font-weight: 300; margin-bottom: 2rem;
+}
+.kids-reco-text p { margin-bottom: 1.2rem; }
+.kids-shelf {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 1.5rem; margin-top: 2rem;
+}
+.kids-book-card { cursor: pointer; }
+.kids-book-card:hover .kids-book-cover { transform: translateY(-4px); }
+.kids-book-cover {
+  width: 100%; aspect-ratio: 2/3; background: var(--paper2);
+  border: 1px solid var(--border); overflow: hidden;
+  display: flex; align-items: center; justify-content: center;
+  transition: transform .2s;
+}
+.kids-book-cover img { width: 100%; height: 100%; object-fit: cover; }
+.kids-book-title {
+  font-family: "Playfair Display", serif; font-size: .82rem;
+  font-weight: 700; margin-top: .5rem; line-height: 1.3;
+  display: -webkit-box; -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical; overflow: hidden;
+}
+.kids-book-author { font-size: .7rem; color: var(--muted); margin-top: .15rem; }
+.kids-book-note {
+  font-size: .68rem; color: var(--muted); margin-top: .3rem;
+  font-style: italic; line-height: 1.4;
+}
+
 
 /* WHAT SHOULD I READ */
 .mood-view { padding: 2rem; max-width: 1000px; margin: 0 auto; display: none; }
@@ -425,20 +457,6 @@ footer .footer-copy {
 </div>
 
 
-<div class="currently-reading" id="crBanner" onclick="openModal('60321392')">
-  <div class="cr-label">Now Reading</div>
-  <div class="cr-cover"><img src="https://covers.openlibrary.org/b/isbn/9781982117351-L.jpg" alt=""></div>
-  <div class="cr-info">
-    <div class="cr-tag">Currently Reading</div>
-    <div class="cr-title">The Song of the Cell</div>
-    <div class="cr-author">Siddhartha Mukherjee</div>
-    <div class="cr-progress">Science &amp; Non-Fiction &middot; 473 pages</div>
-  </div>
-  <div class="cr-arrow">&#8250;</div>
-</div>
-<div onclick="showAbout()" style="background:var(--ink);border-bottom:1px solid rgba(201,151,58,.2);padding:.75rem 2rem;display:flex;align-items:center;justify-content:flex-end;cursor:pointer;transition:opacity .2s;" onmouseover="this.style.opacity='.7'" onmouseout="this.style.opacity='1'">
-  <span style="font-family:'Playfair Display',serif;font-style:italic;font-size:.85rem;color:rgba(245,239,227,.5);">The Book Shelf of Dr. Sulthana Shams</span>
-</div>
 
 <div class="nav-tabs">
   <button class="nav-tab active" onclick="showView('library',this)">Library</button>
@@ -446,6 +464,7 @@ footer .footer-copy {
   <button class="nav-tab" onclick="showView('mood',this)">What to Read</button>
   <button class="nav-tab" onclick="showView('kids',this)">For Young Readers</button>
   <button class="nav-tab" onclick="showView('quotes',this)">Quotes</button>
+  <button class="nav-tab" onclick="showAbout()">About Me</button>
 </div>
 
 <!-- LIBRARY VIEW -->
@@ -455,7 +474,6 @@ footer .footer-copy {
     <div class="filter-pills" id="shelfPills">
       <button class="pill active" data-shelf="read">Read</button>
       
-      <button class="pill" data-shelf="currently-reading">Reading</button>
     </div>
     <span class="filter-label">Rating</span>
     <div class="filter-pills" id="ratingPills">
