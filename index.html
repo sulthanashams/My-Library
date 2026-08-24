@@ -60,7 +60,7 @@
 }
 
 /* KIDS VIEW */
-.kids-view { max-width: 860px; margin: 0 auto; padding: 3rem 2rem; }
+.kids-view { max-width: 860px; margin: 0 auto; padding: 3rem 2rem; display: none; }
 .kids-essay {
   font-family: "DM Sans", sans-serif; font-size: 1rem; line-height: 1.85;
   color: var(--ink); font-weight: 300;
@@ -117,7 +117,7 @@
 }
 
 /* KIDS VIEW */
-.kids-view { max-width: 860px; margin: 0 auto; padding: 3rem 2rem; }
+.kids-view { max-width: 860px; margin: 0 auto; padding: 3rem 2rem; display: none; }
 .kids-essay {
   font-family: "DM Sans", sans-serif; font-size: 1rem; line-height: 1.85;
   color: var(--ink); font-weight: 300;
@@ -427,55 +427,6 @@ footer .footer-copy {
   letter-spacing: .06em;
 }
 
-
-/* AROUND THE WORLD VIEW */
-.world-view { padding: 2rem; max-width: 1400px; margin: 0 auto; display: none; }
-.world-region { margin-bottom: 3rem; }
-.world-region-header {
-  display: flex; align-items: baseline; gap: 1rem;
-  margin-bottom: 1rem; padding-bottom: .5rem;
-  border-bottom: 1px solid var(--border);
-}
-.world-region-title {
-  font-family: "Playfair Display", serif;
-  font-size: 1.3rem; font-weight: 700; color: var(--ink);
-}
-.world-region-count { font-size: .75rem; color: var(--muted); }
-.world-books { display: flex; gap: 1rem; overflow-x: auto; padding-bottom: .75rem; }
-.world-card { flex-shrink: 0; width: 130px; cursor: pointer; }
-.world-card:hover .world-card-cover { transform: translateY(-3px); }
-.world-card-cover {
-  width: 130px; height: 195px; background: var(--paper2);
-  border: 1px solid var(--border); overflow: hidden;
-  display: flex; align-items: center; justify-content: center;
-  transition: transform .2s;
-}
-.world-card-cover img { width: 100%; height: 100%; object-fit: cover; }
-.world-card-title {
-  font-size: .72rem; font-family: "Playfair Display", serif;
-  font-weight: 700; margin-top: .35rem; line-height: 1.3;
-  display: -webkit-box; -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical; overflow: hidden;
-}
-.world-card-author { font-size: .65rem; color: var(--muted); margin-top: .1rem; }
-
-
-/* DISCOVER VIEW */
-.discover-view { min-height: 100vh; }
-.discover-subtabs {
-  background: var(--paper2); border-bottom: 1px solid var(--border);
-  padding: .6rem 2rem; display: flex; gap: .5rem;
-  position: sticky; top: 42px; z-index: 9;
-}
-.discover-subtab {
-  padding: .35rem 1rem; border-radius: 20px; cursor: pointer;
-  border: 1.5px solid var(--border); background: transparent;
-  color: var(--muted); font-family: "DM Sans", sans-serif;
-  font-size: .8rem; transition: all .2s; letter-spacing: .03em;
-}
-.discover-subtab:hover { border-color: var(--accent); color: var(--accent); }
-.discover-subtab.active { background: var(--accent); color: white; border-color: var(--accent); }
-
 @media(max-width:600px){
   .modal-header{flex-direction:column;}
   .filters{padding:.6rem 1rem;}
@@ -485,6 +436,102 @@ footer .footer-copy {
   .genre-view{padding:1rem;}
   .quotes-view{padding:1rem;}
 }
+
+/* MOOD VIEW */
+.mood-view { padding: 2rem; max-width: 1000px; margin: 0 auto; }
+.mood-header { margin-bottom: 1.5rem; }
+.mood-header h2 { font-family: "Playfair Display", serif; font-size: 1.6rem; font-weight: 400; }
+.mood-header p { color: var(--muted); font-size: .85rem; margin-top: .3rem; }
+.mood-pills { display: flex; gap: .6rem; flex-wrap: wrap; margin-bottom: 2rem; }
+.mood-pill { padding: .5rem 1.2rem; border-radius: 20px; cursor: pointer; border: 1.5px solid var(--border); background: transparent; color: var(--muted); font-family: "DM Sans", sans-serif; font-size: .85rem; transition: all .2s; }
+.mood-pill:hover { border-color: var(--accent); color: var(--accent); }
+.mood-pill.active { background: var(--accent); color: white; border-color: var(--accent); }
+.mood-results { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px,1fr)); gap: 1.2rem; }
+.mood-empty { color: var(--muted); font-style: italic; font-size: .9rem; grid-column: 1/-1; padding: 2rem 0; }
+
+/* DISCOVER VIEW */
+.discover-view { min-height: 100vh; }
+.discover-subtabs { background: var(--paper2); border-bottom: 1px solid var(--border); padding: .6rem 2rem; display: flex; gap: .5rem; position: sticky; top: 40px; z-index: 9; }
+.discover-subtab { padding: .35rem 1rem; border-radius: 20px; cursor: pointer; border: 1.5px solid var(--border); background: transparent; color: var(--muted); font-family: "DM Sans", sans-serif; font-size: .8rem; transition: all .2s; letter-spacing: .03em; }
+.discover-subtab:hover { border-color: var(--accent); color: var(--accent); }
+.discover-subtab.active { background: var(--accent); color: white; border-color: var(--accent); }
+
+/* GENRE VIEW */
+.genre-view { padding: 2rem; max-width: 1400px; margin: 0 auto; }
+.genre-section { margin-bottom: 3rem; }
+.genre-header { display: flex; align-items: baseline; gap: 1rem; margin-bottom: 1rem; padding-bottom: .5rem; border-bottom: 1px solid var(--border); }
+.genre-title { font-family: "Playfair Display", serif; font-size: 1.3rem; font-weight: 700; color: var(--ink); }
+.genre-count { font-size: .75rem; color: var(--muted); }
+.genre-books { display: flex; gap: 1rem; overflow-x: auto; padding-bottom: .75rem; }
+.genre-card { flex-shrink: 0; width: 130px; cursor: pointer; }
+.genre-card:hover .genre-card-cover { transform: translateY(-3px); }
+.genre-card-cover { width: 130px; height: 195px; background: var(--paper2); border: 1px solid var(--border); overflow: hidden; display: flex; align-items: center; justify-content: center; transition: transform .2s; }
+.genre-card-cover img { width: 100%; height: 100%; object-fit: cover; }
+.genre-card-title { font-size: .72rem; font-family: "Playfair Display", serif; font-weight: 700; margin-top: .35rem; line-height: 1.3; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.genre-card-author { font-size: .65rem; color: var(--muted); margin-top: .1rem; }
+
+/* QUOTES VIEW */
+.quotes-view { padding: 2rem; max-width: 900px; margin: 0 auto; }
+.quotes-header { margin-bottom: 2rem; }
+.quotes-header h2 { font-family: "Playfair Display", serif; font-size: 1.8rem; font-weight: 400; }
+.quotes-header p { color: var(--muted); font-size: .85rem; margin-top: .3rem; }
+.quote-card { border-left: 3px solid var(--gold); padding: 1.2rem 1.5rem; margin-bottom: 1.5rem; background: white; border-radius: 0 4px 4px 0; cursor: pointer; transition: box-shadow .2s; }
+.quote-card:hover { box-shadow: 0 2px 12px rgba(26,18,9,.08); }
+.quote-card-text { font-family: "Playfair Display", serif; font-style: italic; font-size: 1rem; line-height: 1.75; color: var(--ink); }
+.quote-card-meta { margin-top: .75rem; font-size: .75rem; color: var(--muted); }
+.quote-card-book { color: var(--accent); font-weight: 500; }
+
+/* KIDS VIEW */
+.kids-view { max-width: 860px; margin: 0 auto; padding: 3rem 2rem; }
+.kids-essay { font-family: "DM Sans", sans-serif; font-size: 1rem; line-height: 1.9; color: var(--ink); font-weight: 300; }
+.kids-essay p { margin-bottom: 1.4rem; }
+.kids-essay .essay-title { font-family: "Playfair Display", serif; font-size: 1.6rem; font-weight: 400; margin-bottom: .3rem; line-height: 1.2; }
+.kids-essay .essay-subtitle { font-size: .85rem; color: var(--muted); margin-bottom: 2rem; font-style: italic; }
+.kids-essay .essay-signature { margin-top: 2rem; font-style: italic; color: var(--muted); font-size: .9rem; }
+.kids-divider { border: none; border-top: 1px solid var(--border); margin: 2.5rem 0; }
+.kids-reco-title { font-family: "Playfair Display", serif; font-size: 1.2rem; font-weight: 700; margin-bottom: 1rem; color: var(--ink); }
+.kids-shelf { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 1.5rem; margin-top: 2rem; }
+.kids-book-card { cursor: pointer; }
+.kids-book-card:hover .kids-book-cover { transform: translateY(-4px); }
+.kids-book-cover { width: 100%; aspect-ratio: 2/3; background: var(--paper2); border: 1px solid var(--border); overflow: hidden; display: flex; align-items: center; justify-content: center; transition: transform .2s; }
+.kids-book-cover img { width: 100%; height: 100%; object-fit: cover; }
+.kids-book-title { font-family: "Playfair Display", serif; font-size: .82rem; font-weight: 700; margin-top: .5rem; line-height: 1.3; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.kids-book-author { font-size: .7rem; color: var(--muted); margin-top: .15rem; }
+.kids-book-note { font-size: .68rem; color: var(--muted); margin-top: .3rem; font-style: italic; line-height: 1.4; }
+
+/* ABOUT VIEW */
+.about-view { display: none; position: fixed; inset: 0; background: rgba(26,18,9,.85); z-index: 200; align-items: center; justify-content: center; padding: 1rem; }
+.about-view.open { display: flex; }
+.about-inner { background: var(--paper); max-width: 620px; width: 100%; max-height: 90vh; overflow-y: auto; border-radius: 4px; padding: 3rem; position: relative; }
+.about-close { position: absolute; top: 1rem; right: 1rem; background: none; border: none; cursor: pointer; font-size: 1.4rem; color: var(--muted); line-height: 1; padding: .3rem; }
+.about-close:hover { color: var(--ink); }
+.about-name { font-family: "Playfair Display", serif; font-size: 1.8rem; font-weight: 400; margin-bottom: 2rem; color: var(--ink); }
+.about-body { font-family: "DM Sans", sans-serif; font-size: 1rem; line-height: 1.9; font-weight: 300; color: var(--ink); }
+.about-body p { margin-bottom: 1.4rem; }
+.about-body a { color: #1a73e8; text-decoration: none; border-bottom: 1px solid rgba(26,115,232,.3); }
+
+/* AROUND THE WORLD VIEW */
+.world-view { padding: 2rem; max-width: 1400px; margin: 0 auto; }
+.world-region { margin-bottom: 3rem; }
+.world-region-header { display: flex; align-items: baseline; gap: 1rem; margin-bottom: 1rem; padding-bottom: .5rem; border-bottom: 1px solid var(--border); }
+.world-region-title { font-family: "Playfair Display", serif; font-size: 1.3rem; font-weight: 700; color: var(--ink); }
+.world-region-count { font-size: .75rem; color: var(--muted); }
+.world-books { display: flex; gap: 1rem; overflow-x: auto; padding-bottom: .75rem; }
+.world-card { flex-shrink: 0; width: 130px; cursor: pointer; }
+.world-card:hover .world-card-cover { transform: translateY(-3px); }
+.world-card-cover { width: 130px; height: 195px; background: var(--paper2); border: 1px solid var(--border); overflow: hidden; display: flex; align-items: center; justify-content: center; transition: transform .2s; }
+.world-card-cover img { width: 100%; height: 100%; object-fit: cover; }
+.world-card-title { font-size: .72rem; font-family: "Playfair Display", serif; font-weight: 700; margin-top: .35rem; line-height: 1.3; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.world-card-author { font-size: .65rem; color: var(--muted); margin-top: .1rem; }
+
+/* FOOTER */
+footer { background: var(--ink); color: rgba(245,239,227,.4); padding: 1.5rem 2rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; margin-top: 3rem; }
+footer .footer-title { font-family: "Playfair Display", serif; font-style: italic; font-size: .85rem; color: rgba(245,239,227,.6); }
+footer .footer-links { display: flex; gap: 1.5rem; }
+footer .footer-links a { font-size: .72rem; text-transform: uppercase; letter-spacing: .08em; color: rgba(245,239,227,.35); text-decoration: none; transition: color .2s; }
+footer .footer-links a:hover { color: var(--gold); }
+footer .footer-copy { font-size: .7rem; color: rgba(245,239,227,.25); letter-spacing: .06em; }
+
 </style>
 </head>
 <body>
